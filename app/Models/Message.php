@@ -9,4 +9,12 @@ class Message extends Model
 {
     /** @use HasFactory<\Database\Factories\MessageFactory> */
     use HasFactory;
+
+
+    protected $fillable = [
+        'message',
+        'sender_id',
+        'receiver_id'
+    
+    ];
 }
