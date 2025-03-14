@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Events\MessageSend;
+use App\Events\UserTyping;
 use App\Models\User;
 use App\Models\Message;
 
 use Illuminate\Http\Request;
 use Illuminate\Container\Attributes\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class MessageController extends Controller
 {
@@ -41,8 +43,30 @@ $query->where("sender_id",'=',Auth::id())->where("receiver_id",'=',$receiver_id)
 
         broadcast(new MessageSend($message))->toOthers();
         
-        return response()->json(['status' => 'Message sent succ']);
+        return response()->json(['message' => 'Message sent succ']);
 
     }
-    
+    public function typing(){
+
+        broadcast(new UserTyping(Auth::id()))->toOthers();
+
+ return response()->json(['message' => 'is typing']);
+
+    }
+    public function SetOnline(){
+
+Cache::put('user-id-online-', Auth::id(),true,now()->addMinute(5));
+
+return response()->json(['message' => 'is online']);
+
+    }
+
+    public function SetOffline(){
+
+        Cache::put('user-id-offline-', Auth::id());
+        
+        return response()->json(['message' => 'is offline']);
+        
+            }
+
 }
