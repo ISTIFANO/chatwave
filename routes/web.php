@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('login');
 });
-Auth::routes();
+// Auth::routes();
 Route::middleware('auth')->group(function (){
 
     Route::get("/users",[User::class,'index'])->name('users');
@@ -22,6 +22,10 @@ Route::middleware('auth')->group(function (){
 
 
 });
+
+Route::get('/chat', function () {
+    return view('chat.chat');
+})->name('chat.chat');
 
 
 

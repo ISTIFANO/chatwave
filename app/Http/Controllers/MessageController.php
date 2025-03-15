@@ -15,8 +15,8 @@ class MessageController extends Controller
 {
     public function index(){
         $users = User::where("id",'!=',Auth::id())->get();
-        
-return view("users",compact(["users"=>$users]));
+    
+return view("chat.chat",compact(["users"=>$users]));
     }
 
     public function chat(Request $request){
