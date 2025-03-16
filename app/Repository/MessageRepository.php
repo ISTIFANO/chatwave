@@ -12,7 +12,6 @@ class MessageRepository implements RepositoryInterface, FieldsInterfaces
 
     public function create($data): int
     {
-
         $message = Message::create([
             'sender_id'     => Auth::id(),
             'receiver_id'   => $data['receiverId'],

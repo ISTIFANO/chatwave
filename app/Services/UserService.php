@@ -8,15 +8,14 @@ use App\Services\Service;
 
 class UserService extends Service implements ServicesInterface
 {
-    protected UserRepository $user_repository;
-    protected RoleService $role_service;
 
 
 
 
-    public function __construct()
+    public function __construct(    protected UserRepository $user_repository,    protected RoleService $role_service
+
+    )
     {
-        $this->user_repository = new UserRepository;
     }
     public function create($data)
     {
