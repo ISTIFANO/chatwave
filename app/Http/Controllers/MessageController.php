@@ -18,7 +18,6 @@ class MessageController extends Controller
     
 return view("chat.chat",compact(["users"=>$users]));
     }
-
     public function chat(Request $request){
 $receiver_id =$request->receiver_id;
 $user = User::find($request->receiver_id);
@@ -31,7 +30,7 @@ $query->where("sender_id",'=',Auth::id())->where("receiver_id",'=',$receiver_id)
         $query->where("sender_id",'=',$receiver_id)->where("receiver_id",'=',Auth::id());
 
      });
-     return view('', compact('receiver', 'messages'));
+     return view('', compact('receiver', 'messages'));  
 
     }
     public function sendMessage(Request $request){

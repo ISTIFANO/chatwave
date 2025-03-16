@@ -8,25 +8,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('login');
 });
-// Auth::routes();
-Route::middleware('auth')->group(function (){
 
-    Route::get("/users",[User::class,'index'])->name('users');
-    Route::get("/online",[Message::class,'SetOnline'])->name('online');
-    Route::get("/offline",[Message::class,'SetOffline'])->name('offline');
-    Route::post("/chat/typing",[Message::class,'typing'])->name('typing');
-    Route::post("/chat/{receiver_id}/send",[Message::class,'sendMessage'])->name('sendMessage');
-    Route::get("/chat/{receiver_id}",[Message::class,'chat'])->name('messages');
+Route::middleware('auth')->group(function () {
+    Route::get("/users", [User::class, 'index'])->name('users');
+    Route::get("/online", [Message::class, 'SetOnline'])->name('online');
+    Route::get("/offline", [Message::class, 'SetOffline'])->name('offline');
+    Route::post("/chat/typing", [Message::class, 'typing'])->name('typing');
+    Route::post("/chat/{receiver_id}/send", [Message::class, 'sendMessage'])->name('sendMessage');
+    Route::get("/chat/{receiver_id}", [Message::class, 'chat'])->name('messages');
+});
 
+Route::get('/login', function () {
+    return view('pages.login');
+})->name('login');  // Corrected naming here
 
-
-
+Route::get('/register', function () {
+    return view('pages.register');
 });
 
 Route::get('/chat', function () {
     return view('chat.chat');
 })->name('chat.chat');
-
-
-
-
