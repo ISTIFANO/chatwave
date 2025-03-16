@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Repository\interfaces\FieldsInterfaces;
 use App\Repository\interfaces\RepositoryInterface;
 
@@ -27,14 +28,14 @@ class UserRepository implements RepositoryInterface,FieldsInterfaces
     }
     public function show()
     {
-        $users = User::all();
+        $users = User::where("id", '!=', Auth::id())->get();
 
         return $users;
     }
 
-    public function delete($data, $id)
+    public function delete( $id)
     {
-        $data = $this->findOne($id)->delete();
+         $this->findOne($id)->delete();
 
         return true;
     }

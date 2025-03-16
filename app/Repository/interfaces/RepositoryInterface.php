@@ -7,7 +7,7 @@ interface RepositoryInterface{
     public function create($data) :int;
     public function show();
 
-    public function delete($data,$id);
+    public function delete($id);
 
     public function update($data,$id);
 
